@@ -6,7 +6,7 @@ from django.contrib.auth.forms import AuthenticationForm, UserChangeForm, UserCr
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 
-from .models import Contact
+from .models import Contact, Comment
 
 
 class ContactForm(forms.ModelForm):
@@ -39,3 +39,18 @@ class LoginForm(AuthenticationForm):
         self.helper.label_class = 'col-lg-4'
         self.helper.field_class = 'col-lg-8'
         self.helper.add_input(Submit('login', 'Log in'))
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('name', 'comment',)
+
+    def __init__(self, *args, **kwargs):
+        super(CommentForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_id = 'id-Crispy_ContactForm'
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-lg-4'
+        self.helper.field_class = 'col-lg-8'
+        self.helper.add_input(Submit('send', 'Submit'))
