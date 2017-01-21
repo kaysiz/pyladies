@@ -20,6 +20,7 @@ class Post(models.Model):
     title = models.CharField(max_length=200)
     summary = models.TextField()
     text = models.TextField()
+    picture = models.ImageField(max_length=200, null=True, blank=True)
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
     slug = AutoSlugField(populate_from='title', unique=True)
@@ -77,6 +78,25 @@ class Meetup(models.Model):
     published_date = models.DateTimeField(blank=True, null=True)
     ispast = models.BooleanField(default=True)
     isdisplayed = models.BooleanField(default=False)
+
+    class Meta:
+        managed = True
+
+    def __str__(self):
+        return self.name
+
+    def publish(self):
+        self.published_date = timezone.now()
+        self.save()
+
+
+class Comment(models.Model):
+    name = models.CharField("full name", max_length=120)
+    email = models.CharField("email address", max_length=120)
+    comment = models.TextField()
+    created_date = models.DateTimeField(default=timezone.now)
+    published_date = models.DateTimeField(blank=True, null=True)
+    post = models.ForeignKey('Post')
 
     class Meta:
         managed = True

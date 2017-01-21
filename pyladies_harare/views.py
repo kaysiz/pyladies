@@ -4,7 +4,7 @@ from django.utils import timezone
 
 from datetime import datetime
 from .models import Post, Meetup, Page, Contact, Category
-from .forms import ContactForm
+from .forms import ContactForm, CommentForm
 
 
 def get_meetup():
@@ -82,12 +82,15 @@ class PastMeetupsView(TemplateView):
 
 class PostDetailView(TemplateView):
     template_name = "pyladies_harare/post_detail.html"
+    comment_form = CommentForm()
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, pk, **kwargs):
         context = super(PostDetailView, self).get_context_data(**kwargs)
         context['title'] = 'Blog Post'
         context['categories'] = get_category()
+        context['post'] = get_object_or_404(Post, pk=pk)
         context['meetups'] = get_meetup()
+        context['comment_form'] = self.comment_form
         context['year'] = datetime.now().year
         return context
 

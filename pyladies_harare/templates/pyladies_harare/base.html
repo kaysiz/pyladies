@@ -42,10 +42,10 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a href="#">
-                    <img src="{% static 'pyladies_harare/img/pyladieshrelogo.jpg' %}" width="200" height="100" /> </a>
+                    <img src="{% static 'pyladies_harare/img/pyladieshre.jpg' %}" width="120" height="120" /> </a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
                 <div class = "dropdown"><button class="dropbtn">
                         <a href="{% url 'home' %}">Home</a></button>
                 </div>
@@ -67,6 +67,10 @@
                         <a href="{% url 'past' %}">Submit Talk</a>
                         <a href="{% url 'past' %}">Propose Talk</a>
                     </div>
+                </div>
+                <div class = "dropdown"><button class="dropbtn">
+                    <a href="#">Code of Conduct</a>
+                    </button>
                 </div>
                 <div class = "dropdown"><button class="dropbtn">
                     <a href="{% url 'contact' %}">Contact</a>
@@ -91,8 +95,6 @@
 
                 {% endif %}
 
-                <div class="nav navbar-nav navbar-right"><img src="{% static 'pyladies_harare/img/pyladiesharare.jpg' %}" width="100"/>
-                </div>
             </div>
             <!-- /.navbar-collapse -->
         </div>
